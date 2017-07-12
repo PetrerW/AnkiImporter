@@ -12,9 +12,9 @@ public class TranslationMatcher {
 	/**
 	 * Pattern of an answer from pons.com translator
 	 * example:
-	 * 	<a href='/translate/(english|german|polish|russian)-(english|german|polish|russian)/\\w*'>\\w*</a>
+	 * 	<a href='/translate/(english|german|polish|russian)-(english|german|polish|russian)/\\w*'>\\w*</a> [\\w\\W]*
 	 */
-	public static String[] ponsRequestPatterns = {"<a href='/translate/", "-", "/\\w*'>\\w*</a>"};
+	public static String[] ponsAnswerPatterns = {"<a href='/translate/", "-", "/\\w*'>\\w*</a>( [\\w\\W]*||)"};
 	
 	/**
 	 * A default constructor
@@ -37,7 +37,7 @@ public class TranslationMatcher {
 			{
 				if(checkLanguage(lang1) && checkLanguage(lang2)){
 					String answerPattern;
-					answerPattern = ponsRequestPatterns[0]+lang1+ponsRequestPatterns[1]+lang2+ponsRequestPatterns[2];
+					answerPattern = ponsAnswerPatterns[0]+lang1+ponsAnswerPatterns[1]+lang2+ponsAnswerPatterns[2];
 					return answerPattern;
 				}else 
 					throw new Exception("Wrong language name!");

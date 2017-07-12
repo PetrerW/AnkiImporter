@@ -32,7 +32,8 @@ public class Tester {
 		//Tester.testIsSentence("Sheep");
 		//Tester.testGenerateRequest("pons", "polish", "english", "upholstery");
 		//Tester.testAnswerPattern("pons", "polish", "english", "upholstery");
-		Tester.testFindAnswerWithPattern("pons", "polish", "english", "upholstery");
+		//Tester.testFindAnswerWithPattern("pons", "polish", "english", "upholstery");
+		Tester.testExtractTranslation("<a href='/translate/polish-english/tapicerka'>tapicerka</a>", "pons", "polish", "english");
 	}
 	
 	//test reading from the webpage
@@ -165,8 +166,23 @@ public class Tester {
 		for(String line: DownloadedData){
 			M = P.matcher(line);
 			
-			if(M.matches())	
-						System.out.println(line);
+			if(M.matches())	{
+				System.out.println(line);
+			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @param line
+	 * @param translator
+	 * @param lang1
+	 * @param lang2
+	 * test AnkiImporter.extractTranslation function
+	 */
+	public static void testExtractTranslation(String line, String translator, String lang1, String lang2){
+		AnkiImporter AI = new AnkiImporter();
+		System.out.println(line);
+		System.out.println(AI.extractTranslation(line, translator, lang1, lang2));
 	}
 }
